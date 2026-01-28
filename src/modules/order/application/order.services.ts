@@ -1,4 +1,4 @@
-import { Injectable, Inject } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Order } from "../domain/order.entities";
 import { OrderRepository } from "../domain/order.repository";
 

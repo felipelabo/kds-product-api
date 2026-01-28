@@ -42,5 +42,9 @@ import { InMemoryEventBus } from '../../shared/imeventbus';
       useClass: InMemoryEventBus,
     },
   ],
+  exports: [
+    // Exporta el servicio para que otros módulos (p.ej. RiderModule) puedan inyectarlo
+    OrderService,
+  ],
 })
 export class OrdersModule {}
