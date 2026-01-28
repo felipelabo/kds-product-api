@@ -1,7 +1,7 @@
 // src/orders/application/external-order.listener.ts
 
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { EventBus } from '../../shared/eventbus';
+import { EventBus } from '../../../shared/eventbus';
 import { OrderService } from './order.services';
 import { Order } from '../domain/order.entities';
 

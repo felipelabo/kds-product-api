@@ -19,8 +19,8 @@ import { ExternalOrderListener } from './application/external.listener';
 import { ExternalOrdersMock } from './infrastructure/external.mock';
 
 // Shared
-import { EventBus } from '../shared/eventbus';
-import { InMemoryEventBus } from '../shared/imeventbus';
+import { EventBus } from '../../shared/eventbus';
+import { InMemoryEventBus } from '../../shared/imeventbus';
 
 @Module({
   controllers: [OrderController],

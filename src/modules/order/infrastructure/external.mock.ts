@@ -2,7 +2,7 @@
 
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { EventBus } from '../../shared/eventbus';
+import { EventBus } from '../../../shared/eventbus';
 import { Order } from '../domain/order.entities';
 
 @Injectable()
