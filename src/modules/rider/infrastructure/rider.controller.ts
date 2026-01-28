@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param } from "@nestjs/common";
+import { Controller, Get, Post, Param, Delete } from "@nestjs/common";
 import { RiderService } from "../application/rider.services";
 import { Rider } from "../domain/rider.entities";
 
@@ -21,9 +21,17 @@ export class RiderController {
         // Aquí podrías recibir el cuerpo de la solicitud para crear un rider
         const newRider: Rider = {
             id: "1",
-            orderWanted: "Sample Order"
+            orderWanted: "Sample Order",
+            code: "1234"
         };
         await this.riderService.saveRider(newRider);
         return { message: "Rider created successfully", data: newRider };
     }
+
+    @Delete(":id")
+    async deleteRider(@Param("id") id: string): Promise<{ message: string; data: boolean }> {
+        await this.riderService.deleteRider(id);
+        return { message: "Rider deleted successfully", data:true };
+    }
+  
 }

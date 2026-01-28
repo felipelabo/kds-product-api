@@ -4,4 +4,5 @@ export abstract class RiderRepository {
     abstract getAllRiders(): Promise<Rider[]>;
     abstract getRiderById(riderId: string): Promise<Rider | null>;
     abstract saveRider(rider: Rider): Promise<void>;
+    abstract deleteRider(riderId: string): Promise<void>;
 }

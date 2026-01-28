@@ -2,19 +2,19 @@
 
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { EventBus } from '../../../shared/eventbus';
-import { OrderService } from './order.services';
 import { Order } from '../domain/order.entities';
+import { OrderRepository } from '../domain/order.repository';
 
 @Injectable()
 export class ExternalOrderListener implements OnModuleInit {
   constructor(
     private readonly eventBus: EventBus,
-    private readonly OrderService: OrderService
+    private readonly orderRepository: OrderRepository
   ) {}
 
   onModuleInit() {
     this.eventBus.on('external.order.received', (order: Order) => {
-      this.OrderService.saveOrder(order);
+      this.orderRepository.saveOrder(order);
     });
   }
 }

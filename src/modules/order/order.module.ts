@@ -1,6 +1,6 @@
 // src/orders/orders.module.ts
 
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 
 // Controllers
 import { OrderController } from './infrastructure/order.controller';
@@ -22,7 +22,12 @@ import { ExternalOrdersMock } from './infrastructure/external.mock';
 import { EventBus } from '../../shared/eventbus';
 import { InMemoryEventBus } from '../../shared/imeventbus';
 
+import { RiderModule } from '../rider/rider.module';
+
 @Module({
+  imports: [
+		forwardRef(() => RiderModule),
+	],
   controllers: [OrderController],
   providers: [
     OrderService,
@@ -43,8 +48,7 @@ import { InMemoryEventBus } from '../../shared/imeventbus';
     },
   ],
   exports: [
-    // Exporta el servicio para que otros módulos (p.ej. RiderModule) puedan inyectarlo
-    OrderService,
+    OrderRepository,
   ],
 })
 export class OrdersModule {}

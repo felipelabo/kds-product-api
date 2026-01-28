@@ -19,4 +19,8 @@ export class IMRiderRepository implements RiderRepository {
   async getRiderById(id: string): Promise<Rider | null> {
     return this.riders.find(rider => rider.id === id) || null;
   }
+
+  async deleteRider(riderId: string): Promise<void> {
+    this.riders = this.riders.filter(rider => rider.id !== riderId);
+  }
 }

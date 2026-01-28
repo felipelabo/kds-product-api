@@ -17,4 +17,8 @@ export class RiderService {
     async saveRider(rider: Rider): Promise<void> {
         return this.riderRepository.saveRider(rider);
     }
+
+    async deleteRider(riderId: string): Promise<void> {
+        return this.riderRepository.deleteRider(riderId);
+    }
 }

@@ -6,6 +6,7 @@
 export class Rider {
     constructor(
         public readonly id: string,
-        public readonly orderWanted: string
+        public readonly orderWanted: string,
+        public readonly code: string
     ) {}
 }
