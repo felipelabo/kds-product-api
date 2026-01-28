@@ -10,18 +10,12 @@ export type Item = {
 	quantity?: number
 }
 
-/*export type Order = {
-	id: string
-	state: "PENDING" | "IN_PROGRESS" | "READY" | "DELIVERED"
-	items: Array<Item>
-	name?: string
-	date?: string
-}*/
+export type OrderState = "PENDING" | "IN_PROGRESS" | "READY" | "DELIVERED"
 
 export class Order {
     constructor(
         public readonly id: string,
-        public state: "PENDING" | "IN_PROGRESS" | "READY" | "DELIVERED",
+        public state: OrderState,
         public items: Array<Item>,
         public name?: string,
         public date?: Date
