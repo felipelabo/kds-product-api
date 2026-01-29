@@ -10,7 +10,7 @@ export type Item = {
 	quantity?: number
 }
 
-export type OrderState = "PENDING" | "IN_PROGRESS" | "READY" | "DELIVERED"
+export type OrderState = "PENDING" | "IN_PROGRESS" | "READY" | "DELIVERED" | "CANCELLED"
 
 export class Order {
     constructor(

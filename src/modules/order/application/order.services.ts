@@ -57,4 +57,21 @@ export class OrderService {
     return res;
   }
 
+  async cancelOrder(orderId: string): Promise<Order> {
+    //Verificar que la orden exista
+    const order = await this.orderRepository.getOrderById(orderId);
+    if (!order) throw new Error('Order not found');
+
+    //Verificamos si hay un rider asignado
+    const riders = await this.riderRepository.getAllRiders();
+    const assignedRider = riders.find(rider => rider.orderWanted === orderId);
+    if (!assignedRider) throw new Error('No rider assigned to this order');
+
+    //Actualizar estado de la orden y eliminar rider asignado
+    const res = this.orderRepository.updateOrderState(orderId, 'CANCELLED');
+    await this.riderRepository.deleteRider(assignedRider.id);
+
+    return res;
+  }
+
 }

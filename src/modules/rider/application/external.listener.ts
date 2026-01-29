@@ -14,7 +14,6 @@ export class ExternalOrderListener implements OnModuleInit {
 
   onModuleInit() {
     this.eventBus.on('external.rider.received', (rider: Rider) => {
-      console.log('Nuevo rider recibido desde sistema externo:', rider);  
       this.riderRepository.saveRider(rider);
     });
   }

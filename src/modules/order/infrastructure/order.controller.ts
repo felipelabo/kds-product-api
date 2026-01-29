@@ -50,16 +50,14 @@ export class OrderController {
     }
   }
 
-  @Post()
-  async createOrder() {
-    // Aquí podrías recibir el cuerpo de la solicitud para crear una orden
-    const newOrder:Order = {
-        id: "1",
-        name: "Sample Order",
-        items: [],
-        state: "PENDING"
-    };
-    await this.orderService.saveOrder(newOrder);
-    return { message: "Order created successfully" };
+  @Post(":id/cancelled")
+  async cancelOrder(@Param("id") id: string) {
+    console.log("Cancelling order:", id);
+    try{
+        const order = await this.orderService.cancelOrder(id);
+        return { message: "Order cancelled", data:order };
+    }catch(error){
+        throw new Error('Failed to cancel order');
+    }
   }
 }
