@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post} from "@nestjs/common";
+import { Body, Controller, Get, Param, Post} from "@nestjs/common";
 import { OrderService } from "../application/order.services";
 import { Order } from "../domain/order.entities";
 
@@ -40,13 +40,16 @@ export class OrderController {
   }
 
   @Post(":id/delivered")
-  async moveToDelivered(@Param("id") id: string) {
-    console.log("Moving order to Delivered:", id);
+  async moveToDelivered(
+    @Param("id") id: string, 
+    @Body() body: { codeRider: string }
+  ) {
+    console.log("Moving order to Delivered:", id," y codigo rider:",body.codeRider);
     try{
-        const order = await this.orderService.moveToDelivered(id);
+        const order = await this.orderService.moveToDelivered(id, body.codeRider);
         return { message: "Order moved to Delivered", data:order };
     }catch(error){
-        throw new Error('Failed to move order to Delivered');
+        throw new Error('Failed to move order to Delivered: ' + error.message);
     }
   }
 

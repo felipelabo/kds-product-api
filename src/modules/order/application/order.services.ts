@@ -39,7 +39,7 @@ export class OrderService {
     return this.orderRepository.updateOrderState(orderId, 'READY');
   }
 
-  async moveToDelivered(orderId: string): Promise<Order> {
+  async moveToDelivered(orderId: string, codeRider: string): Promise<Order> {
     //Verificar que la orden exista y esté en estado READY
     const order = await this.orderRepository.getOrderById(orderId);
     if (!order) throw new Error('Order not found');
@@ -49,6 +49,9 @@ export class OrderService {
     const riders = await this.riderRepository.getAllRiders();
     const assignedRider = riders.find(rider => rider.orderWanted === orderId);
     if (!assignedRider) throw new Error('No rider assigned to this order');
+
+    //Verificar que el código del rider coincida
+    if (assignedRider.code !== codeRider) throw new Error('Invalid rider code');
 
     //Actualizar estado de la orden y eliminar rider asignado
     const res = this.orderRepository.updateOrderState(orderId, 'DELIVERED');
