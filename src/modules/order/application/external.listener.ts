@@ -16,5 +16,8 @@ export class ExternalOrderListener implements OnModuleInit {
     this.eventBus.on('external.order.received', (order: Order) => {
       this.orderRepository.saveOrder(order);
     });
+    this.eventBus.on('external.order.uber.received', (order: Order) => {
+      this.orderRepository.saveOrder(order);
+    });
   }
 }

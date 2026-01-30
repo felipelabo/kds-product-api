@@ -17,6 +17,7 @@ import { OrderRepository } from './domain/order.repository';
 //External
 import { ExternalOrderListener } from './application/external.listener';
 import { ExternalOrdersMock } from './infrastructure/external.mock';
+import { ExternalOrdersUberMock } from './infrastructure/external.uber.mock';
 
 // Shared
 import { EventBus } from '../../shared/eventbus';
@@ -34,6 +35,7 @@ import { RiderModule } from '../rider/rider.module';
     IMOrderRepository,
     ExternalOrderListener,
     ExternalOrdersMock,
+    ExternalOrdersUberMock,
 
     // Repository binding (interface → implementation)
     {

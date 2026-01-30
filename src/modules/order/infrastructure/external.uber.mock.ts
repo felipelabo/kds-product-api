@@ -6,7 +6,7 @@ import { EventBus } from '../../../shared/eventbus';
 import { Order } from '../domain/order.entities';
 
 @Injectable()
-export class ExternalOrdersMock implements OnModuleInit {
+export class ExternalOrdersUberMock implements OnModuleInit {
   private interval?: NodeJS.Timeout;
   private maxOrders = this.getRandomInterval(4, 8);
 
@@ -21,14 +21,14 @@ export class ExternalOrdersMock implements OnModuleInit {
       const order = this.createRandomOrder();
 
       // Simula mensaje entrante (MQ / webhook)
-      this.eventBus.emit('external.order.received', order);
+      this.eventBus.emit('external.order.uber.received', order);
 
       this.maxOrders--;
 
       if (this.maxOrders <= 0 && this.interval) {
         clearInterval(this.interval);
       }
-    }, 5000);
+    }, 6000);
   }
 
   private createRandomOrder(): Order {
@@ -38,27 +38,27 @@ export class ExternalOrdersMock implements OnModuleInit {
       [
         {
             id: randomUUID(),
-            name: "Hamburguesa",
+            name: "Hotdog",
             image: "https://example.com/burger.png",
             price: {
                 currency: "USD",
-                amount: 5.99,
+                amount: 4.99,
             },
+            note: "Extra ketchup",
             quantity: 2,
         },
         {
             id: randomUUID(),
-            name: "Papas Fritas",
+            name: "Cocacola",
             image: "https://example.com/fries.png",
             price: {
                 currency: "USD",
-                amount: 2.99,
+                amount: 0.99,
             },
-            note: "Sin sal",
             quantity: 1,
         },
       ],
-      'glovo',
+      'uber',
       new Date()
     );
   }
